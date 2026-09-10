@@ -1,0 +1,17 @@
+{
+  "name": "ASHA - AI Sign Language Communication",
+  "short_name": "Asha Sign",
+  "description": "AI-powered Sign Language Communication App bridging Deaf and Hearing communities with Nigerian Sign Language, 3D Avatar, and Computer Vision.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0F19",
+  "theme_color": "#4F46E5",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

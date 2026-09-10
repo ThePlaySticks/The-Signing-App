@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASHA | AI Sign Language Communication & NSL Translator</title>
+  <meta name="description" content="AI-powered Sign Language Communication App bridging Deaf and Hearing communities with Nigerian Sign Language, 3D Avatar, Speech-to-Sign, and Computer Vision gesture recognition." />
+  <link rel="icon" type="image/svg+xml" href="/public/icon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#4f46e5" />
+
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/src/styles/tokens.css" />
+  <link rel="stylesheet" href="/src/styles/components.css" />
+  <link rel="stylesheet" href="/src/styles/layout.css" />
+</head>
+<body>
+  <!-- Ambient background glow orbs -->
+  <div class="bg-glow-orb bg-glow-1"></div>
+  <div class="bg-glow-orb bg-glow-2"></div>
+
+  <!-- Main App Header -->
+  <header class="app-header">
+    <div class="brand-container">
+      <div class="brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>ASHA <span style="font-weight: 300; opacity: 0.85;">SIGN</span></h1>
+        <p>
+          AI Communication Bridge
+          <span class="badge-nsl">🇳🇬 Nigerian Sign Language</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs" aria-label="Main Navigation">
+      <button class="nav-tab-btn active" data-view="translate-view" id="nav-translate">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+        <span>Speech & Text to Sign</span>
+      </button>
+      <button class="nav-tab-btn" data-view="vision-view" id="nav-vision">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+        <span>Sign to Speech / Vision</span>
+      </button>
+      <button class="nav-tab-btn" data-view="convo-view" id="nav-convo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Conversation Mode</span>
+      </button>
+      <button class="nav-tab-btn" data-view="phrases-view" id="nav-phrases">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+        <span>Quick Phrases</span>
+      </button>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <button class="icon-btn" id="btn-settings-open" title="Accessibility Settings" aria-label="Settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <!-- VIEW 1: SPEECH & TEXT TO SIGN (STUDIO) -->
+    <section id="translate-view" class="view-section active">
+      <div class="studio-grid">
+        <!-- 3D Sign Language Avatar Stage -->
+        <div class="glass-panel" style="padding: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <div>
+              <h2 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;">AI Sign Avatar</h2>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Articulated 3D NSL & ASL signing engine (drag to rotate)</p>
+            </div>
+            <span class="badge-nsl" id="avatar-dialect-badge">NSL Syntax Active</span>
+          </div>
+
+          <div class="avatar-stage-container" id="avatar-stage">
+            <!-- HUD Overlay -->
+            <div class="avatar-overlay-hud">
+              <div class="current-sign-pill" id="avatar-hud-pill">
+                <span class="sign-indicator-dot"></span>
+                <div>
+                  <div class="current-sign-text" id="avatar-current-word">READY</div>
+                  <div class="current-sign-type" id="avatar-current-type">STANDBY</div>
+                </div>
+              </div>
+              <button class="icon-btn" id="btn-reset-avatar-rot" title="Reset View Angle">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              </button>
+            </div>
+
+            <!-- Avatar Playback Controls Toolbar -->
+            <div class="avatar-controls-bar">
+              <button class="avatar-ctrl-btn" id="btn-avatar-playpause" title="Play / Pause">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="icon-playpause"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </button>
+              <button class="avatar-ctrl-btn" id="btn-avatar-replay" title="Replay Sign">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+              </button>
+              <span style="height: 16px; width: 1px; background: var(--border-subtle);"></span>
+              <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">SPEED:</span>
+              <select class="speed-select" id="avatar-speed-select">
+                <option value="0.5">0.5x (Slow)</option>
+                <option value="0.75">0.75x</option>
+                <option value="1.0" selected>1.0x (Normal)</option>
+                <option value="1.5">1.5x</option>
+                <option value="2.0">2.0x (Fast)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Sign Grammar Gloss Breakdown -->
+          <div style="margin-top: 1rem; background: var(--bg-glass); border-radius: var(--radius-md); padding: 0.85rem 1rem; border: 1px solid var(--border-subtle);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; letter-spacing: 0.05em;">Translated Sign Grammar Sequence</span>
+              <span id="grammar-rule-badge" style="font-size: 0.7rem; color: var(--accent-cyan);">Topic-Comment Structure</span>
+            </div>
+            <div id="gloss-tokens-container" style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              <span style="font-size: 0.85rem; color: var(--text-subtle); font-style: italic;">Enter text or speak to see sign gloss breakdown...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input Controls (Speech & Text) -->
+        <div class="glass-panel controls-card">
+          <div>
+            <h2 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;">Hearing Input</h2>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Speak or type your sentence to generate real-time sign language</p>
+          </div>
+
+          <!-- Big Push-to-Talk Speech Button Section -->
+          <div style="background: var(--bg-glass); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center;">
+            <button class="mic-action-btn" id="btn-speech-mic" title="Click to Speak">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>
+              </svg>
+            </button>
+            <div>
+              <div id="speech-status-label" style="font-weight: 600; font-size: 0.95rem;">Tap Microphone to Speak</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Supports English and Nigerian English accents</div>
+            </div>
+
+            <!-- Audio Wave Animation Bar -->
+            <div style="width: 100%;" class="audio-wave-bar">
+              <div class="audio-wave-fill" id="audio-wave-fill"></div>
+            </div>
+
+            <!-- Interim live transcript -->
+            <div id="speech-live-transcript" style="font-size: 0.88rem; color: var(--accent-cyan); min-height: 20px; font-weight: 500;"></div>
+          </div>
+
+          <!-- Text Input Section -->
+          <div>
+            <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 0.5rem;">OR TYPE MESSAGE</label>
+            <div class="input-group">
+              <input type="text" id="text-translate-input" class="input-field" placeholder="e.g. Good afternoon, where is the hospital?" />
+              <button class="btn-primary" id="btn-translate-text" style="padding: 0.45rem 1rem; font-size: 0.85rem;">
+                <span>Translate</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Suggestion Chips -->
+          <div>
+            <span style="font-size: 0.75rem; color: var(--text-subtle); display: block; margin-bottom: 0.5rem; font-weight: 600;">TRY COMMON EXPRESSIONS:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              <button class="cat-pill chip-sample" data-phrase="Good afternoon. How are you today?">Good afternoon. How are you?</button>
+              <button class="cat-pill chip-sample" data-phrase="Thank you very much">Thank you very much</button>
+              <button class="cat-pill chip-sample" data-phrase="Where is the restroom?">Where is the restroom?</button>
+              <button class="cat-pill chip-sample" data-phrase="I need help immediately!">I need help</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: SIGN TO SPEECH & COMPUTER VISION -->
+    <section id="vision-view" class="view-section">
+      <div class="studio-grid">
+        <!-- Live Camera Feed & Skeleton Stage -->
+        <div class="glass-panel" style="padding: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <div>
+              <h2 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;">Camera Sign Recognition</h2>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Sign directly to your camera for real-time AI recognition & audio</p>
+            </div>
+            <div style="display: flex; gap: 0.4rem;">
+              <button class="icon-btn" id="btn-flip-camera" title="Switch Front/Back Camera">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0-4.418-3.582-8-8-8s-8 3.582-8 8"/><path d="m4 10-3-3 3-3"/><path d="M4 14c0 4.418 3.582 8 8 8s8-3.582 8-8"/><path d="m20 14 3 3-3 3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="camera-stage-container" id="camera-stage">
+            <video id="camera-video" class="camera-video" playsinline muted autoplay style="display: none;"></video>
+            <canvas id="camera-canvas" class="camera-canvas-overlay"></canvas>
+            <div class="camera-placeholder" id="camera-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--primary-light);">
+                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>
+              </svg>
+              <div>
+                <h3 style="font-weight: 600; font-size: 1.05rem; margin-bottom: 4px;">Camera is Paused</h3>
+                <p style="font-size: 0.82rem; color: var(--text-muted); max-width: 320px;">Grant camera access to track hand gestures in real-time on your device.</p>
+              </div>
+              <button class="btn-primary" id="btn-start-camera">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7 16 12 23 17 23 7z"/><rect width="15" height="14" x="1" y="5" rx="2" ry="2"/></svg>
+                <span>Start Camera</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Detected Sign HUD Display -->
+          <div style="margin-top: 1rem; background: var(--bg-glass); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Currently Detected Sign</div>
+              <div id="detected-sign-title" style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--accent-emerald);">Waiting for gesture...</div>
+              <div id="detected-sign-gloss" style="font-size: 0.8rem; color: var(--accent-cyan);">-</div>
+            </div>
+            <button class="btn-primary" id="btn-speak-detected" style="gap: 0.5rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+              <span>Speak Aloud</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Vision Guide & Detection Log -->
+        <div class="glass-panel controls-card">
+          <div>
+            <h2 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;">Supported Signs Guide</h2>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Perform these signs in camera view for instant translation & speech:</p>
+          </div>
+
+          <!-- Quick Gesture Cheatsheet -->
+          <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <span style="font-size: 1.4rem;">👋</span>
+                <div>
+                  <strong style="font-size: 0.9rem;">Hello / Greeting</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Open flat palm facing camera</div>
+                </div>
+              </div>
+              <span class="badge-nsl">Ready</span>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <span style="font-size: 1.4rem;">👍</span>
+                <div>
+                  <strong style="font-size: 0.9rem;">Yes / Good</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Thumb pointed upright, fist closed</div>
+                </div>
+              </div>
+              <span class="badge-nsl">Ready</span>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <span style="font-size: 1.4rem;">🤟</span>
+                <div>
+                  <strong style="font-size: 0.9rem;">I Love You</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Thumb + Index + Pinky outstretched</div>
+                </div>
+              </div>
+              <span class="badge-nsl">Ready</span>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <span style="font-size: 1.4rem;">✌️</span>
+                <div>
+                  <strong style="font-size: 0.9rem;">Peace / Letter V</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Index & Middle upright in V shape</div>
+                </div>
+              </div>
+              <span class="badge-nsl">Ready</span>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <span style="font-size: 1.4rem;">👌</span>
+                <div>
+                  <strong style="font-size: 0.9rem;">OK / Understood</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">Thumb & index circle, 3 fingers up</div>
+                </div>
+              </div>
+              <span class="badge-nsl">Ready</span>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <span style="font-size: 1.4rem;">💧</span>
+                <div>
+                  <strong style="font-size: 0.9rem;">Water (W)</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">3 fingers held upright (W shape)</div>
+                </div>
+              </div>
+              <span class="badge-nsl">Ready</span>
+            </div>
+          </div>
+
+          <!-- Auto-Speech Toggle -->
+          <div class="setting-item" style="border: none; padding: 0.5rem 0;">
+            <div>
+              <div class="setting-label">Automatic Voice Output</div>
+              <div class="setting-desc">Speak detected signs aloud automatically</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-auto-tts" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: CONVERSATION MODE -->
+    <section id="convo-view" class="view-section">
+      <div class="convo-split-grid">
+        <!-- Deaf User Side -->
+        <div class="convo-user-column">
+          <div class="convo-header">
+            <div class="convo-user-badge" style="color: var(--accent-cyan);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" /></svg>
+              <span>Deaf User Side</span>
+            </div>
+            <span class="badge-nsl">Visual & Signs</span>
+          </div>
+
+          <!-- Mini Avatar for incoming messages -->
+          <div style="height: 220px; background: rgba(10, 14, 26, 0.9); border-radius: var(--radius-md); position: relative; overflow: hidden;" id="convo-avatar-container">
+            <div style="position: absolute; bottom: 8px; left: 12px; font-size: 0.75rem; color: var(--text-muted); z-index: 5;">
+              Signing Partner Output
+            </div>
+          </div>
+
+          <!-- Quick Deaf Responses -->
+          <div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.4rem;">QUICK RESPONSES:</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+              <button class="cat-pill convo-quick-reply" data-reply="Yes, I understand.">Yes, I understand</button>
+              <button class="cat-pill convo-quick-reply" data-reply="Please repeat that slowly.">Please repeat slowly</button>
+              <button class="cat-pill convo-quick-reply" data-reply="Thank you very much.">Thank you</button>
+              <button class="cat-pill convo-quick-reply" data-reply="I need help.">I need help</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hearing User Side -->
+        <div class="convo-user-column">
+          <div class="convo-header">
+            <div class="convo-user-badge" style="color: var(--primary-light);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+              <span>Hearing User Side</span>
+            </div>
+            <span class="badge-nsl">Speech & Audio</span>
+          </div>
+
+          <!-- Live Conversation Thread -->
+          <div class="convo-chat-stream" id="convo-chat-stream">
+            <div class="chat-bubble hearing">
+              <div>Welcome! You can speak or type to communicate with your deaf partner.</div>
+              <div class="chat-meta">System</div>
+            </div>
+          </div>
+
+          <!-- Hearing Controls -->
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button class="icon-btn" id="btn-convo-mic" style="width: 46px; height: 46px; border-radius: 50%;" title="Speak message">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+            </button>
+            <div class="input-group" style="flex: 1;">
+              <input type="text" id="convo-input" class="input-field" placeholder="Type response..." />
+              <button class="btn-primary" id="btn-convo-send" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: QUICK PHRASE LIBRARY -->
+    <section id="phrases-view" class="view-section">
+      <div class="glass-panel" style="padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2 style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800;">Quick Phrase Library</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Instant expressions for Hospitals, Banks, Transport, Emergencies & Cultural greetings (Available Offline)</p>
+          </div>
+          <!-- Search input -->
+          <div class="input-group" style="min-width: 280px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-muted); margin-right: 6px;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="phrase-search-input" class="input-field" placeholder="Search phrases, signs, tags..." />
+          </div>
+        </div>
+
+        <!-- Category Pills Bar -->
+        <div class="category-filter-bar" style="margin-top: 1.25rem;" id="phrase-category-bar">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Phrases Grid -->
+        <div class="phrases-grid" id="phrases-grid-container">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Accessibility & App Settings Modal -->
+  <div class="modal-overlay" id="settings-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;">Accessibility & Preferences</h3>
+        <button class="icon-btn" id="btn-settings-close" aria-label="Close settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="setting-item">
+        <div>
+          <div class="setting-label">High Contrast Mode</div>
+          <div class="setting-desc">Maximize readability with solid black & yellow borders</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-high-contrast">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div>
+          <div class="setting-label">Large Text Mode</div>
+          <div class="setting-desc">Increase font scale across all screens and subtitles</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-large-text">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div>
+          <div class="setting-label">Dialect Preference</div>
+          <div class="setting-desc">Choose primary sign dictionary grammar</div>
+        </div>
+        <select class="speed-select" id="select-dialect" style="padding: 6px 12px; font-size: 0.85rem;">
+          <option value="nsl" selected>Nigerian Sign Language (NSL)</option>
+          <option value="asl">American Sign Language (ASL)</option>
+          <option value="isl">International Sign (IS)</option>
+        </select>
+      </div>
+
+      <div class="setting-item">
+        <div>
+          <div class="setting-label">Haptic Feedback</div>
+          <div class="setting-desc">Vibrate device upon successful sign recognition</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-haptic" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div style="margin-top: 1.25rem; text-align: right;">
+        <button class="btn-primary" id="btn-save-settings" style="width: 100%;">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
