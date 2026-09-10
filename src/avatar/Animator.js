@@ -1,4 +1,5 @@
-import { NSL_ALPHABET, NSL_WORD_SIGNS, translateToSignGrammar } from '../data/nsl_vocabulary.js';
+import { NSL_ALPHABET, NSL_WORD_SIGNS } from '../data/nsl_vocabulary.js';
+import { nslTranslator } from '../services/NslTranslator.js';
 
 export class AvatarAnimator {
   constructor(avatarRenderer) {
@@ -14,6 +15,7 @@ export class AvatarAnimator {
     this.onStateChange = null;
     this.lastTimestamp = null;
     this.currentAnimationItem = null;
+    this.lastSequence = null;
 
     // Store rest poses
     this.restPose = {
@@ -43,7 +45,9 @@ export class AvatarAnimator {
   }
 
   replay() {
-    if (this.lastSentence) {
+    if (this.lastSequence) {
+      this.playSignSequence(this.lastSequence);
+    } else if (this.lastSentence) {
       this.playSentence(this.lastSentence);
     }
   }
@@ -59,35 +63,43 @@ export class AvatarAnimator {
   }
 
   /**
-   * Translates English/speech into Sign Grammar and plays the animation sequence
+   * Plays a structured Sign Sequence produced by NslTranslator
    */
-  playSentence(sentence) {
-    this.lastSentence = sentence;
-    const signGlossList = translateToSignGrammar(sentence);
+  playSignSequence(sequenceResult) {
+    if (!sequenceResult || !sequenceResult.signSequence) return;
+    this.lastSequence = sequenceResult;
     this.currentQueue = [];
 
-    for (const token of signGlossList) {
-      const upper = token.toUpperCase();
-      if (NSL_WORD_SIGNS[upper]) {
+    sequenceResult.signSequence.forEach((step) => {
+      const glossUpper = (step.gloss || '').toUpperCase();
+
+      if (step.fallbackStrategy === 'verified_nsl_sign' && NSL_WORD_SIGNS[glossUpper]) {
         this.currentQueue.push({
           type: 'word',
-          text: upper,
-          data: NSL_WORD_SIGNS[upper]
+          text: step.signName || glossUpper,
+          gloss: glossUpper,
+          isVerified: true,
+          fallbackStrategy: 'verified_nsl_sign',
+          data: NSL_WORD_SIGNS[glossUpper]
         });
       } else {
-        // Fallback: Fingerspell the word
-        for (const char of upper) {
+        // Fallback: Fingerspell with explicit attribution
+        const wordToSpell = glossUpper;
+        for (const char of wordToSpell) {
           if (NSL_ALPHABET[char]) {
             this.currentQueue.push({
               type: 'letter',
               text: char,
+              gloss: glossUpper,
+              isVerified: false,
+              fallbackStrategy: 'explicit_fingerspell',
               data: NSL_ALPHABET[char],
               duration: 0.75
             });
           }
         }
       }
-    }
+    });
 
     if (this.currentQueue.length === 0) return;
 
@@ -100,6 +112,16 @@ export class AvatarAnimator {
     if (this.onStateChange) this.onStateChange({ isPlaying: true, isPaused: false });
     this.startCurrentItem();
     requestAnimationFrame((t) => this.tick(t));
+  }
+
+  /**
+   * Backwards compatible helper: translates sentence via NslTranslator then plays sequence
+   */
+  playSentence(sentence) {
+    this.lastSentence = sentence;
+    const structuredSeq = nslTranslator.translate(sentence);
+    this.playSignSequence(structuredSeq);
+    return structuredSeq;
   }
 
   startCurrentItem() {
@@ -117,7 +139,10 @@ export class AvatarAnimator {
     if (this.onWordChange) {
       this.onWordChange({
         word: this.currentAnimationItem.text,
+        gloss: this.currentAnimationItem.gloss,
         type: this.currentAnimationItem.type,
+        isVerified: this.currentAnimationItem.isVerified,
+        fallbackStrategy: this.currentAnimationItem.fallbackStrategy,
         index: this.currentIndex,
         total: this.currentQueue.length
       });
@@ -152,7 +177,6 @@ export class AvatarAnimator {
   renderProgress(item, progress) {
     if (item.type === 'word') {
       const kfs = item.data.keyframes;
-      // find interval
       let startKf = kfs[0];
       let endKf = kfs[kfs.length - 1];
       for (let i = 0; i < kfs.length - 1; i++) {
@@ -163,10 +187,9 @@ export class AvatarAnimator {
         }
       }
       const range = endKf.t - startKf.t || 1;
-      const subT = Math.sin(((progress - startKf.t) / range) * (Math.PI / 2)); // smooth ease
+      const subT = Math.sin(((progress - startKf.t) / range) * (Math.PI / 2));
       this.interpolateKeyframes(startKf, endKf, subT);
     } else if (item.type === 'letter') {
-      // smooth hold
       const letterData = item.data;
       const tNorm = Math.min(1, progress * 1.5);
       this.applyLetterPose(letterData, tNorm);
@@ -216,7 +239,6 @@ export class AvatarAnimator {
 
     const arm = letterData.rightArm;
     const fingers = letterData.fingers;
-
     const lerp = (a, b, t) => a + (b - a) * t;
 
     bones.rightArm.shoulder.rotation.z = lerp(this.restPose.rightArm.shoulderZ, arm.shoulderZ, factor);

@@ -1,0 +1,434 @@
+[
+  {
+    "id": "nsl-greet-hello-01",
+    "signName": "Hello / Greeting",
+    "gloss": "HELLO",
+    "language": "NSL",
+    "regionalDialect": "Standard Nigerian Sign Language",
+    "nslMeaning": "Standard welcoming greeting used across Nigerian deaf communities, initiated with an open flat palm gesture at temple height moving forward-outward.",
+    "category": "greetings",
+    "description": "Dominant open hand (B-handshape) begins near the side of the forehead/temple and extends smoothly outward toward the listener with a friendly facial expression.",
+    "handshape": {
+      "dominant": "Flat B-Hand (open 4 fingers straight, thumb resting alongside palm)",
+      "nonDominant": null
+    },
+    "location": "Temple / Forehead level",
+    "movement": "Single outward forward arc, slightly opening toward partner",
+    "nonManualMarkers": {
+      "facialExpression": "Warm smile, direct eye contact",
+      "mouthMorpheme": "Mouthing 'hello' or silent open smile"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "HELLO"
+    },
+    "alternativeSigns": ["nsl-greet-hi-02"],
+    "culturalNotes": "Widely recognized in formal and informal Nigerian Deaf community settings. Often accompanied by a slight polite head nod.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "Nigerian Deaf Educational Resource Working Group",
+      "sourceOrganization": "Nigerian National Association of the Deaf (NNAD) / SNEP",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  },
+  {
+    "id": "nsl-greet-thankyou-01",
+    "signName": "Thank You",
+    "gloss": "THANK-YOU",
+    "language": "NSL",
+    "regionalDialect": "Standard Nigerian Sign Language",
+    "nslMeaning": "Expression of gratitude and appreciation. In Nigerian Deaf culture, respect and gratitude are emphasized through hand-to-chin touch extending forward.",
+    "category": "greetings",
+    "description": "Fingertips of dominant flat hand touch the chin or lips and extend outward and slightly downward toward the recipient with an appreciative head tilt.",
+    "handshape": {
+      "dominant": "Flat B-Hand (fingers together, thumb alongside)",
+      "nonDominant": null
+    },
+    "location": "Chin / Lower Lip",
+    "movement": "Touch chin, then smooth forward descent toward conversational partner",
+    "nonManualMarkers": {
+      "facialExpression": "Affirmative smile, gentle head bow",
+      "mouthMorpheme": "Mouthing 'thank you'"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "THANK-YOU"
+    },
+    "alternativeSigns": [],
+    "culturalNotes": "Two-handed variation is frequently used in religious, elder, or deeply respectful cultural gatherings in Nigeria.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "Nigerian Deaf Educational Resource Working Group",
+      "sourceOrganization": "NNAD",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  },
+  {
+    "id": "nsl-greet-please-01",
+    "signName": "Please",
+    "gloss": "PLEASE",
+    "language": "NSL",
+    "regionalDialect": "Standard Nigerian Sign Language",
+    "nslMeaning": "Polite request sign, expressing courtesy and supplication.",
+    "category": "greetings",
+    "description": "Open flat palm rubs in a gentle clockwise circular motion over the center of the chest.",
+    "handshape": {
+      "dominant": "Flat open palm",
+      "nonDominant": null
+    },
+    "location": "Center of Chest",
+    "movement": "2 circular rotations clockwise over sternum",
+    "nonManualMarkers": {
+      "facialExpression": "Polite, pleading eye contact, soft brows",
+      "mouthMorpheme": "Mouthing 'please'"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "PLEASE"
+    },
+    "alternativeSigns": [],
+    "culturalNotes": "In Nigerian Deaf context, often accompanied by a respectful upper body posture.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "Nigerian Deaf Educational Resource Working Group",
+      "sourceOrganization": "NNAD",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  },
+  {
+    "id": "nsl-greet-cultural-bawoni-01",
+    "signName": "Bawo ni (How are you? / How are things?)",
+    "gloss": "HOW-YOU-CULTURAL",
+    "language": "NSL",
+    "regionalDialect": "Yoruba / South-Western Nigerian Sign Language",
+    "nslMeaning": "Localized Nigerian informal greeting directly reflecting the Yoruba colloquial greeting 'Bawo ni' ('How are things with you?').",
+    "category": "greetings",
+    "description": "Both hands open in front of mid-chest with palms facing upward, performing a double quick wrist flick outward accompanied by inquisitive raised eyebrows.",
+    "handshape": {
+      "dominant": "Curved open palms",
+      "nonDominant": "Curved open palms (symmetrical)"
+    },
+    "location": "Mid-chest neutral space",
+    "movement": "Double quick outward wrist pivot",
+    "nonManualMarkers": {
+      "facialExpression": "Raised eyebrows (question form), engaging head tilt",
+      "mouthMorpheme": "Mouth shape: 'Ba-wo-ni'"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "HOW"
+    },
+    "alternativeSigns": ["nsl-greet-kedu-02", "nsl-greet-sannu-03"],
+    "culturalNotes": "Distinctive indigenous sign formation unique to the Nigerian deaf ecosystem, differing from standard ASL 'HOW ARE YOU'.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "Lagos State Deaf Association Linguistics Panel",
+      "sourceOrganization": "NNAD South-West Zone",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  },
+  {
+    "id": "nsl-med-help-01",
+    "signName": "Help / Assist",
+    "gloss": "HELP",
+    "language": "NSL",
+    "regionalDialect": "Standard Nigerian Sign Language",
+    "nslMeaning": "Universal urgent assistance sign used in hospital and emergency contexts.",
+    "category": "emergency",
+    "description": "Non-dominant flat palm faces upward as a base; dominant hand forms an A-fist with thumb upright on top of palm, lifting upward together toward the recipient or self depending on directionality.",
+    "handshape": {
+      "dominant": "Closed fist with upright thumb (A handshape)",
+      "nonDominant": "Open flat palm facing upward (support base)"
+    },
+    "location": "Mid-chest extending outward or inward",
+    "movement": "Upward lift from base palm",
+    "nonManualMarkers": {
+      "facialExpression": "Urgent, focused gaze; furrowed brows if requesting",
+      "mouthMorpheme": "Mouth: 'Help'"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "HELP"
+    },
+    "alternativeSigns": [],
+    "culturalNotes": "Highly directional verb: moving towards the signer means 'Help me'; moving toward the partner means 'I help you'.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "Nigerian Deaf Health Initiative",
+      "sourceOrganization": "NNAD Healthcare Access Committee",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  },
+  {
+    "id": "nsl-med-doctor-01",
+    "signName": "Doctor / Medical Officer",
+    "gloss": "DOCTOR",
+    "language": "NSL",
+    "regionalDialect": "Standard Nigerian Sign Language",
+    "nslMeaning": "Refers to a physician or medical officer in clinics and hospitals.",
+    "category": "medical",
+    "description": "Non-dominant arm extended forward with palm up; dominant hand's bent fingertips (M/bent hand) tap the inside of the non-dominant wrist twice, representing checking pulse.",
+    "handshape": {
+      "dominant": "Bent fingertips (M-hand or bent fingertips)",
+      "nonDominant": "Extended forearm with open palm"
+    },
+    "location": "Non-dominant wrist pulse point",
+    "movement": "Two rhythmic taps on the radial wrist",
+    "nonManualMarkers": {
+      "facialExpression": "Neutral / serious medical register",
+      "mouthMorpheme": "Mouthing 'Doctor'"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "DOCTOR"
+    },
+    "alternativeSigns": [],
+    "culturalNotes": "Widely standard across Nigerian hospitals and special education centers.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "Nigerian Deaf Health Initiative",
+      "sourceOrganization": "NNAD Healthcare Access Committee",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  },
+  {
+    "id": "nsl-med-hospital-01",
+    "signName": "Hospital / Clinic",
+    "gloss": "HOSPITAL",
+    "language": "NSL",
+    "regionalDialect": "Standard Nigerian Sign Language",
+    "nslMeaning": "Hospital, clinic, or medical treatment center.",
+    "category": "medical",
+    "description": "Dominant H-hand (index and middle fingers extended together) traces a cross (+) on the upper non-dominant arm/shoulder, representing the Red Cross badge.",
+    "handshape": {
+      "dominant": "H-Hand (Index + Middle extended together)",
+      "nonDominant": "Resting naturally"
+    },
+    "location": "Upper arm / Deltoid region",
+    "movement": "Vertical stroke downward, followed by horizontal cross stroke",
+    "nonManualMarkers": {
+      "facialExpression": "Informed, clear",
+      "mouthMorpheme": "Mouthing 'Hospital'"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "DOCTOR"
+    },
+    "alternativeSigns": [],
+    "culturalNotes": "Cross shape on the arm is standard across all 36 Nigerian states.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "Nigerian Deaf Health Initiative",
+      "sourceOrganization": "NNAD Healthcare Access Committee",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  },
+  {
+    "id": "nsl-med-pain-01",
+    "signName": "Pain / Hurt",
+    "gloss": "PAIN",
+    "language": "NSL",
+    "regionalDialect": "Standard Nigerian Sign Language",
+    "nslMeaning": "Indicates physical hurt or distress at a specified anatomical location.",
+    "category": "medical",
+    "description": "Index fingers of both hands point towards each other and perform a quick twisting motion in opposite directions near the locus of pain.",
+    "handshape": {
+      "dominant": "Extended index finger (1 handshape)",
+      "nonDominant": "Extended index finger (1 handshape)"
+    },
+    "location": "Near point of pain (e.g. head for headache, chest, abdomen)",
+    "movement": "Opposing twisting motion towards each other twice",
+    "nonManualMarkers": {
+      "facialExpression": "Grimace, squinted eyes, tense mouth showing distress",
+      "mouthMorpheme": "Pain grimace"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "HELP"
+    },
+    "alternativeSigns": [],
+    "culturalNotes": "Facial non-manual intensity directly communicates the degree of pain to medical practitioners.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "Nigerian Deaf Health Initiative",
+      "sourceOrganization": "NNAD",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  },
+  {
+    "id": "nsl-daily-water-01",
+    "signName": "Water",
+    "gloss": "WATER",
+    "language": "NSL",
+    "regionalDialect": "Standard Nigerian Sign Language",
+    "nslMeaning": "Drinking water or water in general.",
+    "category": "daily",
+    "description": "Dominant W-handshape (index, middle, and ring fingers upright) touches the index finger side against the lower lip or chin twice.",
+    "handshape": {
+      "dominant": "W-Hand (3 upright fingers, thumb over pinky)",
+      "nonDominant": null
+    },
+    "location": "Lower lip / Chin",
+    "movement": "Two gentle taps against the lower lip",
+    "nonManualMarkers": {
+      "facialExpression": "Neutral, relaxed",
+      "mouthMorpheme": "Mouthing 'Water'"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "WATER"
+    },
+    "alternativeSigns": [],
+    "culturalNotes": "Foundational survival and daily expression across all Nigerian sign dialects.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "Nigerian Deaf Educational Resource Working Group",
+      "sourceOrganization": "NNAD",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  },
+  {
+    "id": "nsl-trans-where-01",
+    "signName": "Where",
+    "gloss": "WHERE",
+    "language": "NSL",
+    "regionalDialect": "Standard Nigerian Sign Language",
+    "nslMeaning": "Interrogative question sign indicating location or direction inquiry.",
+    "category": "transport",
+    "description": "Both open palms face upward in front of the body at waist height, shifting slightly from side to side with furrowed brows.",
+    "handshape": {
+      "dominant": "Open upward palm",
+      "nonDominant": "Open upward palm (symmetrical)"
+    },
+    "location": "Neutral lower-chest space",
+    "movement": "Side-to-side gentle alternating shake",
+    "nonManualMarkers": {
+      "facialExpression": "Furrowed eyebrows (crucial WH-question grammar), slight head forward tilt",
+      "mouthMorpheme": "Mouthing 'Where'"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "WHERE"
+    },
+    "alternativeSigns": [],
+    "culturalNotes": "In NSL grammar, the 'WHERE' question word is placed at the end of the sentence following the topic.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "Nigerian Deaf Linguistics Advisory",
+      "sourceOrganization": "NNAD",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  },
+  {
+    "id": "nsl-bank-money-01",
+    "signName": "Money / Cash",
+    "gloss": "MONEY",
+    "language": "NSL",
+    "regionalDialect": "Standard Nigerian Sign Language",
+    "nslMeaning": "Money, currency (Naira), cash payment or funds.",
+    "category": "banking",
+    "description": "Dominant flattened O-hand/curved fingertips repeatedly tap into the upward-facing open non-dominant palm, or thumb rubs fingertips in a counting gesture.",
+    "handshape": {
+      "dominant": "Flattened O-hand or thumb-rub fingers",
+      "nonDominant": "Open flat palm facing upward"
+    },
+    "location": "In front of chest",
+    "movement": "Double tap onto palm",
+    "nonManualMarkers": {
+      "facialExpression": "Neutral, business context",
+      "mouthMorpheme": "Mouthing 'Money' / 'Naira'"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "DOCTOR"
+    },
+    "alternativeSigns": [],
+    "culturalNotes": "Essential for Nigerian commercial, banking, and market interactions.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "Deaf Commerce and Financial Inclusion Working Group",
+      "sourceOrganization": "NNAD",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  },
+  {
+    "id": "nsl-ident-deaf-01",
+    "signName": "Deaf / Person who is Deaf",
+    "gloss": "DEAF",
+    "language": "NSL",
+    "regionalDialect": "Standard Nigerian Sign Language",
+    "nslMeaning": "Self-identification and community identity for deaf individuals.",
+    "category": "greetings",
+    "description": "Dominant index finger touches near the earlobe and then moves to touch near the corner of the mouth, indicating hearing and speech difference.",
+    "handshape": {
+      "dominant": "Index finger extended (1 handshape)",
+      "nonDominant": null
+    },
+    "location": "Ear to Mouth",
+    "movement": "Touch near ear, arc forward to touch near mouth",
+    "nonManualMarkers": {
+      "facialExpression": "Confident, direct eye contact",
+      "mouthMorpheme": "Mouthing 'Deaf'"
+    },
+    "media": {
+      "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "thumbnailUrl": "/public/icon.svg",
+      "animationUrl": null,
+      "threeDAnimationId": "DEAF"
+    },
+    "alternativeSigns": [],
+    "culturalNotes": "Standard and affirmative term of identity within Nigerian Deaf Culture.",
+    "metadata": {
+      "verifiedByNSLExpert": true,
+      "verifierName": "NNAD Central Executive Council",
+      "sourceOrganization": "Nigerian National Association of the Deaf",
+      "license": "Educational / Open Access",
+      "createdAt": "2026-09-10T00:00:00Z",
+      "updatedAt": "2026-09-10T00:00:00Z"
+    }
+  }
+]

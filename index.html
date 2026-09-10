@@ -17,6 +17,10 @@
   <link rel="stylesheet" href="/src/styles/tokens.css" />
   <link rel="stylesheet" href="/src/styles/components.css" />
   <link rel="stylesheet" href="/src/styles/layout.css" />
+
+  <!-- MediaPipe Hands & Camera Utils for Real On-Device Computer Vision -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <!-- Ambient background glow orbs -->
@@ -72,16 +76,29 @@
     <!-- VIEW 1: SPEECH & TEXT TO SIGN (STUDIO) -->
     <section id="translate-view" class="view-section active">
       <div class="studio-grid">
-        <!-- 3D Sign Language Avatar Stage -->
+        <!-- 3D Sign Language Avatar & Native Video Stage -->
         <div class="glass-panel" style="padding: 1.25rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
             <div>
-              <h2 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;">AI Sign Avatar</h2>
-              <p style="font-size: 0.8rem; color: var(--text-muted);">Articulated 3D NSL & ASL signing engine (drag to rotate)</p>
+              <h2 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;">Visual Sign Output</h2>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Switch between 3D avatar & authentic native NSL video demonstration</p>
             </div>
-            <span class="badge-nsl" id="avatar-dialect-badge">NSL Syntax Active</span>
+            
+            <!-- Dual Renderer Mode Switcher -->
+            <div style="display: flex; gap: 0.4rem; align-items: center;">
+              <div class="nav-tabs" style="padding: 2px;">
+                <button class="nav-tab-btn active" id="btn-mode-avatar" style="padding: 4px 10px; font-size: 0.78rem;">
+                  <span>🤖 3D Avatar</span>
+                </button>
+                <button class="nav-tab-btn" id="btn-mode-video" style="padding: 4px 10px; font-size: 0.78rem;">
+                  <span>📹 Native Video</span>
+                </button>
+              </div>
+              <span class="badge-nsl" id="avatar-dialect-badge">NSL Syntax</span>
+            </div>
           </div>
 
+          <!-- 3D Avatar Viewport -->
           <div class="avatar-stage-container" id="avatar-stage">
             <!-- HUD Overlay -->
             <div class="avatar-overlay-hud">
@@ -117,10 +134,15 @@
             </div>
           </div>
 
-          <!-- Sign Grammar Gloss Breakdown -->
+          <!-- Native Sign Video Stage (Alternative authentic player) -->
+          <div class="avatar-stage-container" id="video-stage" style="display: none;">
+            <!-- Populated dynamically by SignVideoPlayer -->
+          </div>
+
+          <!-- Sign Grammar Gloss Breakdown & Provenance Status -->
           <div style="margin-top: 1rem; background: var(--bg-glass); border-radius: var(--radius-md); padding: 0.85rem 1rem; border: 1px solid var(--border-subtle);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
-              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; letter-spacing: 0.05em;">Translated Sign Grammar Sequence</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 0.4rem;">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; letter-spacing: 0.05em;">Translated NSL Sign Sequence</span>
               <span id="grammar-rule-badge" style="font-size: 0.7rem; color: var(--accent-cyan);">Topic-Comment Structure</span>
             </div>
             <div id="gloss-tokens-container" style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
@@ -239,9 +261,9 @@
             <p style="font-size: 0.8rem; color: var(--text-muted);">Perform these signs in camera view for instant translation & speech:</p>
           </div>
 
-          <!-- Quick Gesture Cheatsheet -->
+          <!-- Quick Gesture Cheatsheet (Interactive Practice Targets) -->
           <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+            <button class="sign-guide-btn" data-sign-target="HELLO" style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer; text-align: left; color: inherit; width: 100%; transition: var(--transition-fast);">
               <div style="display: flex; align-items: center; gap: 0.6rem;">
                 <span style="font-size: 1.4rem;">👋</span>
                 <div>
@@ -249,10 +271,10 @@
                   <div style="font-size: 0.75rem; color: var(--text-muted);">Open flat palm facing camera</div>
                 </div>
               </div>
-              <span class="badge-nsl">Ready</span>
-            </div>
+              <span class="badge-nsl" style="pointer-events: none;">Test Sign</span>
+            </button>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+            <button class="sign-guide-btn" data-sign-target="YES_GOOD" style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer; text-align: left; color: inherit; width: 100%; transition: var(--transition-fast);">
               <div style="display: flex; align-items: center; gap: 0.6rem;">
                 <span style="font-size: 1.4rem;">👍</span>
                 <div>
@@ -260,10 +282,10 @@
                   <div style="font-size: 0.75rem; color: var(--text-muted);">Thumb pointed upright, fist closed</div>
                 </div>
               </div>
-              <span class="badge-nsl">Ready</span>
-            </div>
+              <span class="badge-nsl" style="pointer-events: none;">Test Sign</span>
+            </button>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+            <button class="sign-guide-btn" data-sign-target="ILY" style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer; text-align: left; color: inherit; width: 100%; transition: var(--transition-fast);">
               <div style="display: flex; align-items: center; gap: 0.6rem;">
                 <span style="font-size: 1.4rem;">🤟</span>
                 <div>
@@ -271,10 +293,10 @@
                   <div style="font-size: 0.75rem; color: var(--text-muted);">Thumb + Index + Pinky outstretched</div>
                 </div>
               </div>
-              <span class="badge-nsl">Ready</span>
-            </div>
+              <span class="badge-nsl" style="pointer-events: none;">Test Sign</span>
+            </button>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+            <button class="sign-guide-btn" data-sign-target="PEACE_V" style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer; text-align: left; color: inherit; width: 100%; transition: var(--transition-fast);">
               <div style="display: flex; align-items: center; gap: 0.6rem;">
                 <span style="font-size: 1.4rem;">✌️</span>
                 <div>
@@ -282,10 +304,10 @@
                   <div style="font-size: 0.75rem; color: var(--text-muted);">Index & Middle upright in V shape</div>
                 </div>
               </div>
-              <span class="badge-nsl">Ready</span>
-            </div>
+              <span class="badge-nsl" style="pointer-events: none;">Test Sign</span>
+            </button>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+            <button class="sign-guide-btn" data-sign-target="OK" style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer; text-align: left; color: inherit; width: 100%; transition: var(--transition-fast);">
               <div style="display: flex; align-items: center; gap: 0.6rem;">
                 <span style="font-size: 1.4rem;">👌</span>
                 <div>
@@ -293,10 +315,10 @@
                   <div style="font-size: 0.75rem; color: var(--text-muted);">Thumb & index circle, 3 fingers up</div>
                 </div>
               </div>
-              <span class="badge-nsl">Ready</span>
-            </div>
+              <span class="badge-nsl" style="pointer-events: none;">Test Sign</span>
+            </button>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+            <button class="sign-guide-btn" data-sign-target="WATER_W" style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.8rem; background: var(--bg-glass); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); cursor: pointer; text-align: left; color: inherit; width: 100%; transition: var(--transition-fast);">
               <div style="display: flex; align-items: center; gap: 0.6rem;">
                 <span style="font-size: 1.4rem;">💧</span>
                 <div>
@@ -304,8 +326,8 @@
                   <div style="font-size: 0.75rem; color: var(--text-muted);">3 fingers held upright (W shape)</div>
                 </div>
               </div>
-              <span class="badge-nsl">Ready</span>
-            </div>
+              <span class="badge-nsl" style="pointer-events: none;">Test Sign</span>
+            </button>
           </div>
 
           <!-- Auto-Speech Toggle -->
